@@ -44,6 +44,7 @@ _type_map = {
     'decimal': types.DECIMAL,
     'double': types.FLOAT,
     'int': types.INTEGER,
+    int: types.INTEGER,
     'integer': types.INTEGER,
     'interval': types.Interval,
     'smallint': types.SMALLINT,
@@ -383,7 +384,7 @@ class DrillDialect(default.DefaultDialect):
             for row in column_metadata:
 
                 #  Get rid of precision information in data types
-                data_type = row[1].lower()
+                data_type = str(row[1]).lower()
                 pattern = r"[a-zA-Z]+\(\d+, \d+\)"
 
                 if re.search(pattern, data_type):
